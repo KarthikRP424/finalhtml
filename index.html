@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitaplus | Water Emergency Monitor</title>
+
+  <style>
+    :root {
+      --bg: #08111f;
+      --panel: #111e30;
+      --border: #26374d;
+      --text: #f0f6ff;
+      --muted: #9aabc2;
+      --blue: #38bdf8;
+      --green: #34d399;
+      --red: #fb7185;
+      --yellow: #fbbf24;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      padding: 24px 6%;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    .demo-label {
+      border: 1px solid #805f18;
+      color: var(--yellow);
+      background: #342812;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 6%;
+    }
+
+    .welcome {
+      margin-bottom: 24px;
+    }
+
+    .welcome h1 {
+      font-size: clamp(25px, 4vw, 38px);
+      margin: 0 0 10px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      min-width: 0;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .icon {
+      font-size: 24px;
+    }
+
+    .value {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 750;
+      margin: 24px 0 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #26374d;
+      color: var(--muted);
+    }
+
+    .good {
+      color: var(--green);
+      background: #12392f;
+    }
+
+    .danger {
+      color: var(--red);
+      background: #421e2b;
+    }
+
+    .warning {
+      color: var(--yellow);
+      background: #3b3017;
+    }
+
+    .section-title {
+      font-size: 19px;
+      margin: 30px 0 14px;
+    }
+
+    .activity {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 8px 20px;
+    }
+
+    .event {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      font-size: 13px;
+    }
+
+    .event:last-child {
+      border-bottom: none;
+    }
+
+    .event span:last-child {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--blue);
+      color: #07111f;
+    }
+
+    button.secondary {
+      background: #26374d;
+      color: var(--text);
+    }
+
+    button:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 3px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 650px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 20px 5%;
+      }
+
+      main {
+        padding: 24px 5%;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <div class="brand">BITA<span>PLUS</span></div>
+      <div class="subtitle">AI-Enabled Water Emergency Monitoring</div>
+    </div>
+    <div class="demo-label">SIMULATION MODE</div>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h1>Water Safety Dashboard</h1>
+      <p>
+        Monitor motion events and nearby objects for your prototype.
+        This browser demo uses simulated sensor data, not live hardware.
+      </p>
+    </section>
+
+    <section class="grid" aria-label="Sensor status">
+      <article class="card">
+        <div class="card-top">
+          <h2>PIR Motion Sensor</h2>
+          <span class="icon" aria-hidden="true">◉</span>
+        </div>
+        <div class="value" id="motionValue">NO MOTION</div>
+        <div class="description">Human movement sensor status</div>
+        <span class="status good" id="motionStatus">Monitoring</span>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h2>LED Indicator</h2>
+          <span class="icon" aria-hidden="true">💡</span>
+        </div>
+        <div class="value" id="ledValue">OFF</div>
+        <div class="description">Configured for a 5-second motion flash</div>
+        <span class="status" id="ledStatus">Inactive</span>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h2>Ultrasonic Sensor</h2>
+          <span class="icon" aria-hidden="true">⌁</span>
+        </div>
+        <div class="value" id="distanceValue">-- cm</div>
+        <div class="description">Alert range: 15 cm to 50 cm</div>
+        <span class="status" id="distanceStatus">Waiting for reading</span>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <h2>System Status</h2>
+          <span class="icon" aria-hidden="true">▣</span>
+        </div>
+        <div class="value" id="systemValue">DEMO</div>
+        <div class="description">Browser simulation, not a live emergency detector</div>
+        <span class="status warning" id="systemStatus">Not connected to hardware</span>
+      </article>
+    </section>
+
+    <h2 class="section-title">Prototype Controls</h2>
+    <div class="description">
+      Use these buttons to demonstrate how the dashboard reacts.
+      They do not control the physical NodeMCU.
+    </div>
+
+    <div class="controls">
+      <button id="motionButton">Simulate Motion</button>
+      <button id="distanceButton">Simulate 30 cm</button>
+      <button id="clearButton" class="secondary">Clear Alerts</button>
+    </div>
+
+    <h2 class="section-title">Activity Log</h2>
+    <section class="activity" id="activityLog" aria-live="polite">
+      <div class="event">
+        <span>Dashboard initialized</span>
+        <span>Simulation mode</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Bitaplus | Water Emergency Prototype<br>
+    Demonstration interface only. Not a certified safety system.
+  </footer>
+
+  <script>
+    const motionValue = document.getElementById("motionValue");
+    const motionStatus = document.getElementById("motionStatus");
+    const ledValue = document.getElementById("ledValue");
+    const ledStatus = document.getElementById("ledStatus");
+    const distanceValue = document.getElementById("distanceValue");
+    const distanceStatus = document.getElementById("distanceStatus");
+    const activityLog = document.getElementById("activityLog");
+
+    let ledTimer = null;
+    let ledTimeout = null;
+
+    function logEvent(message) {
+      const row = document.createElement("div");
+      row.className = "event";
+
+      const label = document.createElement("span");
+      label.textContent = message;
+
+      const time = document.createElement("span");
+      time.textContent = new Date().toLocaleTimeString();
+
+      row.append(label, time);
+      activityLog.prepend(row);
+
+      while (activityLog.children.length > 8) {
+        activityLog.lastElementChild.remove();
+      }
+    }
+
+    function simulateMotion() {
+      motionValue.textContent = "MOTION";
+      motionStatus.textContent = "Motion detected";
+      motionStatus.className = "status danger";
+      logEvent("Simulated motion detected");
+
+      ledValue.textContent = "ON";
+      ledStatus.textContent = "5-second flash";
+      ledStatus.className = "status good";
+
+      clearTimeout(ledTimeout);
+      clearTimeout(ledTimer);
+
+      ledTimer = setTimeout(() => {
+        ledValue.textContent = "OFF";
+        ledStatus.textContent = "Flash complete";
+        ledStatus.className = "status";
+        logEvent("Simulated LED turned OFF");
+      }, 5000);
+
+      // Reset the simulated PIR status after the demo event.
+      ledTimeout = setTimeout(() => {
+        motionValue.textContent = "NO MOTION";
+        motionStatus.textContent = "Monitoring";
+        motionStatus.className = "status good";
+        logEvent("Simulated motion ended");
+      }, 6000);
+    }
+
+    function simulateDistance(distance) {
+      distanceValue.textContent = distance.toFixed(1) + " cm";
+
+      if (distance >= 15 && distance <= 50) {
+        distanceStatus.textContent = "OBJECT IN ALERT RANGE";
+        distanceStatus.className = "status danger";
+        logEvent("Distance alert: " + distance + " cm");
+      } else {
+        distanceStatus.textContent = "Outside alert range";
+        distanceStatus.className = "status good";
+        logEvent("Distance normal: " + distance + " cm");
+      }
+    }
+
+    function clearAlerts() {
+      clearTimeout(ledTimer);
+      clearTimeout(ledTimeout);
+
+      motionValue.textContent = "NO MOTION";
+      motionStatus.textContent = "Monitoring";
+      motionStatus.className = "status good";
+
+      ledValue.textContent = "OFF";
+      ledStatus.textContent = "Inactive";
+      ledStatus.className = "status";
+
+      distanceValue.textContent = "-- cm";
+      distanceStatus.textContent = "Waiting for reading";
+      distanceStatus.className = "status";
+
+      logEvent("Demo alerts cleared");
+    }
+
+    document.getElementById("motionButton")
+      .addEventListener("click", simulateMotion);
+
+    document.getElementById("distanceButton")
+      .addEventListener("click", () => simulateDistance(30));
+
+    document.getElementById("clearButton")
+      .addEventListener("click", clearAlerts);
+  </script>
+</body>
+</html>
